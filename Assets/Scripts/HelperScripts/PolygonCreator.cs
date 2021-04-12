@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public static class PolygonCreator
@@ -35,7 +36,7 @@ public static class PolygonCreator
     }
 
 
-    public static Tuple<GameObject, Vector3[]> CreatePolygon(Vector2[] points, Transform parent, Material material, float inset = 0.0f, float heightOffset = 0.0f)
+    public static Tuple<GameObject, Vector3[]> CreatePolygon(Vector2[] points, Transform parent, Material material, float inset = 0.0f, float heightOffset = 0.0f, bool flipNormals = false)
     {
         Triangulator tr = new Triangulator(points);
         int[] indices = tr.Triangulate();
@@ -80,9 +81,10 @@ public static class PolygonCreator
         mesh.uv = uvs;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
+        if (flipNormals) mesh.triangles = mesh.triangles.Reverse().ToArray();
 
         // Set up game object with mesh;
-        GameObject gameObject = new GameObject("poly", typeof(MeshFilter), typeof(MeshRenderer)); ;
+        GameObject gameObject = new GameObject("poly", typeof(MeshFilter), typeof(MeshRenderer));
         gameObject.GetComponent<MeshFilter>().mesh = mesh;
         gameObject.GetComponent<MeshRenderer>().material = material;
         gameObject.transform.parent = parent;
@@ -90,10 +92,10 @@ public static class PolygonCreator
         return new Tuple<GameObject, Vector3[]>(gameObject, vertices);
     }
 
-    public static Tuple<GameObject, Vector3[]> CreatePolygon(Vector3[] points, Transform parent, Material material, float inset = 0.0f, float heightOffset = 0.0f)
+    public static Tuple<GameObject, Vector3[]> CreatePolygon(Vector3[] points, Transform parent, Material material, float inset = 0.0f, float heightOffset = 0.0f, bool flipNormals = false)
     {
         Vector2[] pointsV2 = System.Array.ConvertAll<Vector3, Vector2>(points, V3toV2);
-        return CreatePolygon(pointsV2, parent, material, inset, heightOffset);
+        return CreatePolygon(pointsV2, parent, material, inset, heightOffset, flipNormals);
     }
 
 

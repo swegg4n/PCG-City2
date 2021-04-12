@@ -18,7 +18,7 @@ public class RoadGenerator : MonoBehaviour
 
 
 
-    private void Awake()
+    private void Start()
     {
         Generate();
     }
@@ -34,6 +34,8 @@ public class RoadGenerator : MonoBehaviour
         CreateConnections();
         CreateModelVertices();
         CreateRoadModels();
+
+        roadNetworkParent.GetComponent<MeshCombiner>().CombineMeshes();
     }
 
 
@@ -110,8 +112,6 @@ public class RoadGenerator : MonoBehaviour
                     PolygonCreator.CreatePolygon(new Vector3[] { rn.ModelVertices[3], rn.ModelVertices[1], rn.Right_connection.ConnectedNode.ModelVertices[0] }, roadNetworkParent, roadMaterial);
                     PolygonCreator.CreatePolygon(new Vector3[] { rn.ModelVertices[3], rn.Right_connection.ConnectedNode.ModelVertices[0], rn.Right_connection.ConnectedNode.ModelVertices[2] }, roadNetworkParent, roadMaterial);
                 }
-
-                roadNetworkParent.GetComponent<MeshCombiner>().CombineMeshes();
             }
         }
     }

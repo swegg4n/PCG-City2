@@ -14,7 +14,7 @@ public class CurbGenerator : MonoBehaviour
     Transform parksParent;
 
 
-    private void Awake()
+    private void Start()
     {
         Generate();
     }
@@ -29,6 +29,9 @@ public class CurbGenerator : MonoBehaviour
         roadNodes = GetComponent<RoadGenerator>().RoadNodes;
 
         GenerateCurbs();
+
+        curbsParent.GetComponent<MeshCombiner>().CombineMeshes();
+        parksParent.GetComponent<MeshCombiner>().CombineMeshes();
     }
 
 
