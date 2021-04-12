@@ -49,7 +49,6 @@ public class BuildingsGenerator : MonoBehaviour
             (Color, Color) colors = ColorSwatchGenerator.RandomMatchingColors();
             Material m1 = new Material(mainMat) { color = colors.Item1 };
             Material m2 = new Material(subMat) { color = colors.Item2 };
-
             materialsArr[i] = (m1, m2);
         }
     }
@@ -105,7 +104,10 @@ public class BuildingsGenerator : MonoBehaviour
 
         PolygonCreator.CreatePolygon(vertices, parent, floorMaterial, -0.2f, 0.01f);
         for (int f = 0; f < floors; f++)
+        {
             PolygonCreator.CreatePolygon(vertices, parent, floorMaterial, -0.2f, 2.6f * (f + 1), true);
+            PolygonCreator.CreatePolygon(vertices, parent, floorMaterial, -0.2f, 2.6f * (f + 1), false);
+        }
 
         parent.GetComponent<MeshCombiner>().CombineMeshes();
     }
@@ -128,19 +130,20 @@ public class BuildingsGenerator : MonoBehaviour
 
 
             Material[] mats = instance.GetComponent<MeshRenderer>().materials;
-            if (wallPrefab.name == "Wall04_2m" || wallPrefab.name == "Wall04_4m")
+            for (int i = 0; i < mats.Length; i++)
             {
-                mats[0] = m2;
-                mats[2] = m1;
-                instance.GetComponent<MeshRenderer>().materials = mats;
+                switch (mats[i].name)
+                {
+                    case "MainMat (Instance)":
+                        mats[i] = m1;
+                        break;
+
+                    case "SubMat (Instance)":
+                        mats[i] = m2;
+                        break;
+                }
             }
-            else
-            {
-                mats[0] = m1;
-                if (mats.Length > 1)
-                    mats[1] = m1;
-                instance.GetComponent<MeshRenderer>().materials = mats;
-            }
+            instance.GetComponent<MeshRenderer>().materials = mats;
 
             for (int f = 0; f < floors; f++)
             {
