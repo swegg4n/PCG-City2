@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 171511879}
   - component: {fileID: 171511880}
   - component: {fileID: 171511881}
+  - component: {fileID: 171511882}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -169,10 +170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadMaterial: {fileID: 2100000, guid: 55e9a2626b6b26d418e1b10cbab1ec9e, type: 2}
-  areaSize: 500
+  areaSize: 700
   tileCount: 10
   straightness: 0.4
-  roadWidth: 7
+  roadWidth: 9
   removeRoadChance: 0.2
   isParkChance: 0.1
 --- !u!114 &171511880
@@ -190,8 +191,8 @@ MonoBehaviour:
   curbFiller: {fileID: 4204125270948394782, guid: d3d9d84a8cc7889488593ed89702707f, type: 3}
   curbMaterial: {fileID: 2100000, guid: aa1b665fb38556747af3377758c76f8e, type: 2}
   grassMaterial: {fileID: 2100000, guid: 58bd2ef3cfcba3d44bc759fe0835a8ab, type: 2}
-  curbWidth: 2
-  curbHeight: 0.15
+  curbWidth: 3
+  curbHeight: 0.2
 --- !u!114 &171511881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,9 +208,24 @@ MonoBehaviour:
   floorMaterial: {fileID: 2100000, guid: b070ea2dc17afbd4f9ff73c8b8ee5b16, type: 2}
   mainMat: {fileID: 2100000, guid: 989a4613a9498ec40a5693f18ad6d500, type: 2}
   subMat: {fileID: 2100000, guid: 7d9f059b398f8a743ab2dfc02c5b1a23, type: 2}
-  buildingsInset: 4
+  buildingsInset: 7
   minMaxBuildingHeight: {x: 10, y: 28}
+  minMaxBuildingDivisions: {x: 0, y: 2}
   roofPrefab: {fileID: 4635463295651834715, guid: 95f76512d36afba4fb034f3f1684d55e, type: 3}
+--- !u!114 &171511882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171511877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd87ea8708e63f48a5776752925631d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streetLamp: {fileID: 1593075039824410834, guid: 3a34a60f4ce650541b8ed4a8a56eaf4b, type: 3}
+  minMaxLampsPerRoad: {x: 2, y: 4}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +255,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.7
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

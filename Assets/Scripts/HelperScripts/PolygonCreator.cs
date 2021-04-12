@@ -113,6 +113,53 @@ public static class PolygonCreator
         }
     }
 
+    public static Vector3[,] DividePolygon(Vector3[] mainPolygon, int x_divisions, int y_divisions)
+    {
+        Vector3[,] vertices = new Vector3[x_divisions + 2, y_divisions + 2];
+
+        Vector3[] side_x_top = DivideSide(mainPolygon[1], mainPolygon[2], x_divisions);
+        Vector3[] side_x_bot = DivideSide(mainPolygon[0], mainPolygon[3], x_divisions);
+        Vector3[] side_y_left = DivideSide(mainPolygon[0], mainPolygon[1], y_divisions);
+        Vector3[] side_y_right = DivideSide(mainPolygon[3], mainPolygon[2], y_divisions);
+
+        for (int i = 0; i < side_y_left.Length; i++)
+            vertices[0, i] = side_y_left[i];
+
+        for (int i = 0; i < side_y_right.Length; i++)
+            vertices[vertices.GetLength(0) - 1, i] = side_y_right[i];
+
+        for (int x = 1; x <= x_divisions; x++)
+        {
+            Vector3 from = side_x_bot[x];
+            Vector3 to = side_x_top[x];
+            Vector3[] vertical_y = DivideSide(from, to, y_divisions);
+
+            for (int y = 0; y < vertical_y.Length; y++)
+            {
+                vertices[x, y] = vertical_y[y];
+            }
+        }
+
+        return vertices;
+    }
+
+    public static Vector3[] DivideSide(Vector3 from, Vector3 to, int divisions)
+    {
+        Vector3[] vertices = new Vector3[2 + divisions];
+        vertices[0] = from;
+        vertices[vertices.Length - 1] = to;
+
+        Vector3 dir = to - from;
+        for (int d = 1; d <= divisions; d++)
+        {
+            Vector3 origDivVertex = dir / (divisions + 1) * d + from;
+            vertices[d] = origDivVertex;
+        }
+
+        return vertices;
+    }
+
+
 
     private static Vector2 V3toV2(Vector3 v3)
     {

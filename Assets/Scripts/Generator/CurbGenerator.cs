@@ -6,12 +6,12 @@ public class CurbGenerator : MonoBehaviour
     [SerializeField] private GameObject curbFiller;
     [SerializeField] private Material curbMaterial;
     [SerializeField] private Material grassMaterial;
-    [SerializeField] private float curbWidth = 1.0f;
+    public float curbWidth = 1.0f;
     [SerializeField] private float curbHeight = 0.15f;
 
-    RoadNode[,] roadNodes;
-    Transform curbsParent;
-    Transform parksParent;
+    private RoadNode[,] roadNodes;
+    private Transform curbsParent;
+    private Transform parksParent;
 
 
     private void Start()

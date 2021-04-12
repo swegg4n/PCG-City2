@@ -11,6 +11,8 @@ public class BuildingsGenerator : MonoBehaviour
     [SerializeField] private float buildingsInset = 0.3f;
     [SerializeField] private Vector2Int minMaxBuildingHeight = new Vector2Int(6, 20);
 
+    [SerializeField] private Vector2Int minMaxBuildingDivisions = new Vector2Int(0, 2);
+
     private (Material, Material)[] materialsArr = new (Material, Material)[20];
 
     private GameObject[] walls2m;
@@ -20,6 +22,7 @@ public class BuildingsGenerator : MonoBehaviour
 
     private RoadNode[,] roadNodes;
     private Transform buildingsParent;
+
 
 
     private void Start()
@@ -67,6 +70,8 @@ public class BuildingsGenerator : MonoBehaviour
 
     private void GenerateBuildings()
     {
+        float curbInset = GetComponent<CurbGenerator>().curbWidth * 0.5f;
+
         foreach (var rn in roadNodes)
         {
             if (rn.IsPark == false && rn.Up_connection && rn.Right_connection)
@@ -81,7 +86,19 @@ public class BuildingsGenerator : MonoBehaviour
 
                 Vector3[] buildingVerts = PolygonCreator.InsetPolygon(openAreaVerts, buildingsInset);
 
-                GenerateBuilding(buildingVerts);
+                int x_divisions = Random.Range(minMaxBuildingDivisions.x, minMaxBuildingDivisions.y + 1);
+                int y_divisions = Random.Range(minMaxBuildingDivisions.x, minMaxBuildingDivisions.y + 1);
+
+                Vector3[,] subPolys = PolygonCreator.DividePolygon(buildingVerts, x_divisions, y_divisions);
+
+                for (int x = 0; x < subPolys.GetLength(0) - 1; x++)
+                {
+                    for (int y = 0; y < subPolys.GetLength(1) - 1; y++)
+                    {
+                        Vector3[] subBuilding = PolygonCreator.InsetPolygon(new Vector3[] { subPolys[x, y], subPolys[x, y + 1], subPolys[x + 1, y + 1], subPolys[x + 1, y] }, curbInset);
+                        GenerateBuilding(subBuilding);
+                    }
+                }
             }
         }
     }
@@ -111,6 +128,7 @@ public class BuildingsGenerator : MonoBehaviour
 
         parent.GetComponent<MeshCombiner>().CombineMeshes();
     }
+
 
     private void GenerateWall(Vector3 from, Vector3 to, int floors, Material m1, Material m2, Transform parent)
     {
