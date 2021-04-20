@@ -32,6 +32,7 @@ public class DecorationsGenerator : MonoBehaviour
         parent.parent = decorationsParent;
 
         float lampsInset = 0.5f;
+        float curbHeight = GetComponent<CurbGenerator>().curbHeight;
 
         foreach (var rn in roadNodes)
         {
@@ -54,9 +55,9 @@ public class DecorationsGenerator : MonoBehaviour
                 Quaternion rotation_13 = Quaternion.LookRotation(normal_13, Vector3.up);
 
                 for (int i = 1; i < lampPositions_02.Length - 1; i++)
-                    Instantiate(streetLamp, lampPositions_02[i] + normal_02 * lampsInset, rotation_02, parent);
+                    Instantiate(streetLamp, lampPositions_02[i] + normal_02 * lampsInset + Vector3.up * curbHeight, rotation_02, parent);
                 for (int i = 1; i < lampPositions_13.Length - 1; i++)
-                    Instantiate(streetLamp, lampPositions_13[i] + normal_13 * lampsInset, rotation_13, parent);
+                    Instantiate(streetLamp, lampPositions_13[i] + normal_13 * lampsInset + Vector3.up * curbHeight, rotation_13, parent);
 
             }
             if (rn.Right_connection && rn.Right_connection.ActiveConnection)
@@ -78,9 +79,9 @@ public class DecorationsGenerator : MonoBehaviour
                 Quaternion rotation_10 = Quaternion.LookRotation(normal_10, Vector3.up);
 
                 for (int i = 1; i < lampPositions_32.Length - 1; i++)
-                    Instantiate(streetLamp, lampPositions_32[i] + normal_32 * lampsInset, rotation_32, parent);
+                    Instantiate(streetLamp, lampPositions_32[i] + normal_32 * lampsInset + Vector3.up * curbHeight, rotation_32, parent);
                 for (int i = 1; i < lampPositions_10.Length - 1; i++)
-                    Instantiate(streetLamp, lampPositions_10[i] + normal_10 * lampsInset, rotation_10, parent);
+                    Instantiate(streetLamp, lampPositions_10[i] + normal_10 * lampsInset + Vector3.up * curbHeight, rotation_10, parent);
             }
 
         }
