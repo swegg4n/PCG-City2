@@ -164,15 +164,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171511877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6251211897398be48b8fe8b0c10c5292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roadMaterial: {fileID: 2100000, guid: 55e9a2626b6b26d418e1b10cbab1ec9e, type: 2}
-  areaSize: 700
+  areaSize: 1000
   tileCount: 10
-  straightness: 0.4
+  straightness: 0.8
   roadWidth: 9
   removeRoadChance: 0.2
   isParkChance: 0.1
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171511877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc389dac9ec71b44b8131abfac33f74b, type: 3}
   m_Name: 
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171511877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cc637b4c2c2b704bab09f1bfe187519, type: 3}
   m_Name: 
@@ -209,7 +209,7 @@ MonoBehaviour:
   mainMat: {fileID: 2100000, guid: 989a4613a9498ec40a5693f18ad6d500, type: 2}
   subMat: {fileID: 2100000, guid: 7d9f059b398f8a743ab2dfc02c5b1a23, type: 2}
   buildingsInset: 7
-  minMaxBuildingHeight: {x: 10, y: 28}
+  minMaxBuildingHeight: {x: 8, y: 32}
   minMaxBuildingDivisions: {x: 0, y: 2}
   roofPrefab: {fileID: 4635463295651834715, guid: 95f76512d36afba4fb034f3f1684d55e, type: 3}
 --- !u!114 &171511882
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171511877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efd87ea8708e63f48a5776752925631d, type: 3}
   m_Name: 
